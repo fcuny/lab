@@ -24,12 +24,3 @@ make install-hooks
 
 This installs the pre-commit hooks into your clone. Hooks are opt-in per
 clone; CI enforces the same checks on every push and pull request.
-
-## History
-
-Earlier infrastructure lives in two archived, private repositories:
-
-- `fcuny/infra`: Ansible for long-lived hosts (2018 to 2026).
-- `fcuny/infrastructure`: Puppet (2019 to 2022).
-
-This repository starts fresh and shares no history with them.
