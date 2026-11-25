@@ -1,0 +1,6 @@
+# Account-specific settings (project, zone, ...). Never commit these.
+.env
+.env.*
+!.env.example
+/.direnv/
+/.envrc.local

@@ -1,0 +1,45 @@
+# Run with `make lint`. CI runs the same target on every push and pull request.
+repos:
+  # Scans the staged changes on each commit.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  # The hook above only sees staged changes, so it finds nothing in CI.
+  # This one scans every commit in the history; `make lint` runs it.
+  - repo: local
+    hooks:
+      - id: gitleaks-history
+        name: Detect hardcoded secrets in all commits
+        entry: gitleaks git --redact --verbose
+        language: golang
+        additional_dependencies: [github.com/zricethezav/gitleaks/v8@v8.30.1]
+        pass_filenames: false
+        always_run: true
+        stages: [manual]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-executables-have-shebangs
+      - id: detect-private-key
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.50.0
+    hooks:
+      - id: markdownlint

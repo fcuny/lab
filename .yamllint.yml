@@ -1,0 +1,7 @@
+extends: default
+rules:
+  line-length: disable
+  document-start: disable
+  # GitHub Actions uses a bare `on:` key.
+  truthy:
+    check-keys: false
