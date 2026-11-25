@@ -1,0 +1,7 @@
+[Unit]
+Description=Power off when idle (see /usr/local/libexec/idle-poweroff)
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/default/idle-poweroff
+ExecStart=/usr/local/libexec/idle-poweroff

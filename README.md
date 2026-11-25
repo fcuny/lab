@@ -7,6 +7,11 @@ My workstation is a Mac, so anything that needs Linux, KVM, or more CPU than a
 laptop has runs on cloud VMs. This repository keeps the recipes for those
 machines so that a fresh one is one command away.
 
+## Recipes
+
+- [`bootc-vm/`](bootc-vm/README.md): a persistent GCE VM for bootc's booted
+  tmt tests, stopped when idle.
+
 ## Conventions
 
 - Nothing account-specific is tracked: no project IDs, project numbers,
