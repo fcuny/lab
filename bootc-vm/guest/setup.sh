@@ -113,12 +113,21 @@ install_idle_poweroff() {
   sudo systemctl enable --now idle-poweroff.timer
 }
 
+configure_sshd() {
+  step "Configuring sshd keepalive"
+  # sshd keeps the first value it reads; 50-cloudimg-settings.conf sets 120s.
+  sudo install -m 0644 "$here/sshd-keepalive.conf" /etc/ssh/sshd_config.d/40-lab-keepalive.conf
+  sudo sshd -t
+  sudo systemctl try-reload-or-restart ssh.service
+}
+
 install_packages
 fetch_actions
 host_setup
 install_rust
 install_tmt
 configure_shell
+configure_sshd
 install_idle_poweroff
 step "Done. Host environment:"
 cat "$host_env"

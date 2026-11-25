@@ -171,7 +171,7 @@ func TestGuestArchive(t *testing.T) {
 		}
 		modes[h.Name] = h.Mode
 	}
-	for _, name := range []string{"setup.sh", "idle-poweroff.sh", "idle-poweroff.service", "idle-poweroff.timer"} {
+	for _, name := range []string{"setup.sh", "idle-poweroff.sh", "idle-poweroff.service", "idle-poweroff.timer", "sshd-keepalive.conf"} {
 		if _, ok := modes[name]; !ok {
 			t.Errorf("archive lacks %s; has %v", name, modes)
 		}

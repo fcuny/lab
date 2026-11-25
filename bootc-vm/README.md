@@ -88,7 +88,9 @@ pin it.
 A systemd timer on the VM powers it off after 60 minutes without an SSH
 session and with a 5-minute load average below 1. A guest poweroff is a GCE
 stop, so only the disk is billed afterwards. A detached run (tmux, nohup)
-counts as activity only while it keeps a CPU busy. Set
+counts as activity only while it keeps a CPU busy. sshd drops sessions
+whose client has gone away within about 3 minutes, so a dead laptop
+connection or an orphaned IAP tunnel doesn't keep the VM up. Set
 `BOOTC_VM_IDLE_MINUTES` (0 disables) and re-run `make bootc-vm-provision` to
 change it.
 
