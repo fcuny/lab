@@ -8,8 +8,19 @@ minutes) to almost nothing on the next run.
 
 ## Usage
 
+You need Go and an authenticated `gcloud`. The targets run the `lab` CLI
+([`cmd/lab`](../cmd/lab)), which calls the Compute Engine API with tokens from
+your `gcloud` login and uses `gcloud compute ssh` for SSH.
+
 Set `GCP_PROJECT` and `GCP_ZONE` in the environment or in `.env` (copy
-[`.env.example`](../.env.example)). Then:
+[`.env.example`](../.env.example)). The project needs billing and three APIs,
+once:
+
+```sh
+gcloud --project="$GCP_PROJECT" services enable compute.googleapis.com iap.googleapis.com oslogin.googleapis.com
+```
+
+Then:
 
 ```sh
 make bootc-vm-create     # create if missing, start, provision (about 10 minutes)
@@ -24,10 +35,11 @@ make bootc-vm-destroy    # delete the VM and its disk, after confirmation
 `make bootc-vm-create` is idempotent: on an existing VM it starts it if needed
 and re-runs the guest setup.
 
-To run a command without an interactive shell, call the script directly:
+To run a command without an interactive shell, call the CLI directly. The
+arguments after `ssh` go to `gcloud compute ssh`:
 
 ```sh
-bootc-vm/vm.sh ssh --command='cd bootc && just test-tmt readonly'
+go run ./cmd/lab bootc-vm ssh --command='cd bootc && just test-tmt readonly'
 ```
 
 ### Testing a bootc pull request

@@ -24,7 +24,8 @@ machines so that a fresh one is one command away.
   may use the Google Cloud SDK instead of calling `gcloud`. Scripts that run
   on a fresh VM before any toolchain exists stay in shell.
 - Every commit passes `make lint`, which runs the pre-commit hooks:
-  gitleaks, shellcheck, yamllint and markdownlint. CI runs the same target.
+  gitleaks, shellcheck, yamllint and markdownlint, and `make check`, which
+  builds, vets, staticchecks and tests the Go code. CI runs both targets.
 
 ## Setup
 

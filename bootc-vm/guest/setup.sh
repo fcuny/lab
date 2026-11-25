@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Runs on the VM as the operator's user (bootc-vm/vm.sh provision copies it
+# Runs on the VM as the operator's user (`lab bootc-vm provision` copies it
 # there). Sets the host up the way bootc's CI sets up a GitHub ubuntu-26.04
 # runner, plus the tools those runners preinstall. Safe to re-run.
 set -euo pipefail
